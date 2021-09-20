@@ -8,7 +8,7 @@ OBJS = $(SRCS:.c=.o)
 
 LIBFT = libft.a
 
-MLX = libmlx.a
+MLX = libmlx.dylib
 
 HEADERS = fractol.h
 
@@ -23,11 +23,11 @@ $(NAME): $(OBJS) $(HEADERS) $(LIBFT) $(MLX)
 
 $(LIBFT):
 	make -C ./libft
-	cp ./libft/libft.a ./
+	cp ./libft/$(LIBFT) ./
 
 $(MLX):
 	make -C ./minilibX
-	cp ./minilibX/libmlx.a ./
+	cp ./minilibX/$(MLX) ./
 
 clean:
 	rm -rf $(OBJS)

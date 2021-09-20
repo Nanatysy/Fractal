@@ -16,6 +16,12 @@ int	main(int argc, char **argv)
 		all.set = MANDELBROT;
 	else
 		all.set = 0;
+
+	all.img_data = malloc(sizeof(t_img_data));
+	if (!all.img_data)
+		exit(9999);
+
+
 	if (all.set == MANDELBROT)
 		(void)argv; //  start mandelbrot
 	else if (all.set == JULIA)

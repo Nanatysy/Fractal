@@ -6,6 +6,8 @@
 
 int print_errors(char *flag)
 {
+	// TODO: malloc error, screen size error
+
 	printf("%sError: %s%s\n", RED, NONE, flag);
 	if (!ft_strncmp(flag, ARG_NUM_ERROR, ft_strlen(ARG_NUM_ERROR)) ||
 	!ft_strncmp(flag, WRONG_SET, ft_strlen(WRONG_SET)))
