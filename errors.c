@@ -4,10 +4,11 @@
 
 #include "fractol.h"
 
-int print_errors(int flag)
+int print_errors(char *flag)
 {
-	if (flag == ARG_NUM_ERROR)
-		printf("Wrong number of arguments. Please specify which set you want "
-			   "to see:\nJulia set or Mandelbrot set.\n");
+	printf("%sError: %s%s\n", RED, NONE, flag);
+	if (!ft_strncmp(flag, ARG_NUM_ERROR, ft_strlen(ARG_NUM_ERROR)) ||
+	!ft_strncmp(flag, WRONG_SET, ft_strlen(WRONG_SET)))
+		printf("Please specify which set you want to see:\nJulia set or Mandelbrot set.\n");
 	return (0);
 }

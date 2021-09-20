@@ -7,7 +7,7 @@ set(CMAKE_C_FLAGS "-Wall -Werror -Wextra")
 add_executable(fractol
         fractol.h
         errors.c
-        main.c)
+        main.c mlx_start.c)
 
 find_library(LIBFT ft libft)
 find_library(MLX mlx minilibX)

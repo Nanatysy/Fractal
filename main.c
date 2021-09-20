@@ -3,7 +3,6 @@
 //
 
 #include "fractol.h"
-#include "./libft/libft.h"
 
 int	main(int argc, char **argv)
 {
@@ -16,9 +15,13 @@ int	main(int argc, char **argv)
 	else if (ft_strncmp(argv[1], "Mandelbrot set", ft_strlen("Mandelbrot set") + 1) == 0)
 		all.set = MANDELBROT;
 	else
-		all.set = WRONG_SET;
-	if (all.set == WRONG_SET)
-		printf("Error, wrong set\n");
-
-		return (0);
+		all.set = 0;
+	if (all.set == MANDELBROT)
+		(void)argv; //  start mandelbrot
+	else if (all.set == JULIA)
+		(void)argv; //  start julia
+	else
+		return (print_errors(WRONG_SET));
+	mlx_start(&all);
+	return (0);
 }
