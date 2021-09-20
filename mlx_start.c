@@ -18,23 +18,44 @@ int	my_close_x(t_all *all)
 	exit(0);
 }
 
+int	check_belong_to_cardioid(double x, double y)
+{
+	double	teta;
+	double	quarter;
+	double	half;
+
+	quarter = 1. / 4;
+	half = 1. / 2;
+	teta = atan2(y, x - quarter);
+	if (sqrt(pow((x - quarter), 2) + pow(y, 2)) <= half - half * cos(teta))
+		return (1);
+	return (0);
+}
+
 int	check_belongings(double x, double y)
 {
 	int		i;
 	double	z;
+	double	xn;
+	double	yn;
 
 	i = 0;
 	z = 0;
+	xn = x;
+	yn = y;
 
 	// TODO: optimisation
+	if (check_belong_to_cardioid(x, y) == 1)
+		return (1);
 
-	while (i < 100)
+	while (i < 5000)
 	{
-		z = pow(z, 2) + x - y;
+		xn = pow(xn, 2) - pow(yn, 2) + x;
+		yn = 2 * xn * yn + y;
+		if (sqrt(pow(xn, 2) + pow(yn, 2)) > 2)
+			return (0);
 		i++;
 	}
-	if (fabs(z) > 2)
-		return (0);
 	return (1);
 }
 

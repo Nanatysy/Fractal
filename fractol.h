@@ -16,8 +16,8 @@
 # define RED "\x1b[31m"
 # define NONE "\x1b[0m"
 
-# define WIN_HEIGHT 800
-# define WIN_WIDTH 800
+# define WIN_HEIGHT 600
+# define WIN_WIDTH 1000
 
 # define ARG_NUM_ERROR "wrong number of arguments."
 # define JULIA 1
