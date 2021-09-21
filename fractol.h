@@ -16,8 +16,8 @@
 # define RED "\x1b[31m"
 # define NONE "\x1b[0m"
 
-# define WIN_HEIGHT 600
-# define WIN_WIDTH 1000
+# define WIN_HEIGHT 800
+# define WIN_WIDTH 1200
 
 # define ARG_NUM_ERROR "wrong number of arguments."
 # define JULIA 1
@@ -26,7 +26,9 @@
 
 typedef struct	s_img_data
 {
-	void		*mlx_image;
+//	void		*mlx_image;
+	double		x_corner;
+	double		y_corner;
 	char		*addr;
 	int			bits_per_pixel;
 	int			bytes_per_pixel;
@@ -44,8 +46,12 @@ typedef struct	s_all {
 
 void	mlx_start(t_all *all);
 void	my_mlx_pixel_put(t_img_data *data, int x, int y, int color);
+void	render_image_m(t_img_data *data);
+void	render_image_j(t_img_data *data);
 int		my_close_x(t_all *all);
 int		my_close(int keycode, t_all *all);
+int		check_belongings_m(double x, double y);
+int		check_belong_to_cardioid(double x, double y);
 int		print_errors(char *flag);
 
 #endif //FRACTOL_H

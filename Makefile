@@ -2,7 +2,9 @@ NAME = fractol
 
 SRCS =	main.c \
 		errors.c \
-		mlx_start.c
+		mlx_start.c \
+		mandelbrot.c \
+		julia.c
 
 OBJS = $(SRCS:.c=.o)
 
@@ -19,7 +21,7 @@ CFLAGS = -Wall -Werror -Wextra
 all: $(NAME)
 
 $(NAME): $(OBJS) $(HEADERS) $(LIBFT) $(MLX)
-	$(CC) $(CFLAGS) $(LIBFT) $(MLX) $(OBJS) -framework OpenGL -framework AppKit -o $(NAME)
+	$(CC) $(CFLAGS) $(LIBFT) $(MLX) $(OBJS) -framework OpenGL -o $(NAME)
 
 $(LIBFT):
 	make -C ./libft
