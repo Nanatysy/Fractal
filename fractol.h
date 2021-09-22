@@ -19,9 +19,7 @@
 # define WIN_HEIGHT 800
 # define WIN_WIDTH 1200
 
-# define RED_PIXEL 0xFF0000
-# define GREEN_PIXEL 0x00FF00
-# define BLUE_PIXEL 0x0000FF
+# define MAX_ITERATIONS 250
 
 # define ARG_NUM_ERROR "wrong number of arguments."
 # define JULIA 1
@@ -67,5 +65,6 @@ int		my_close(int keycode, t_all *all);
 int		check_belongings_m(double x, double y);
 int		check_belong_to_cardioid(double x, double y);
 int		print_errors(char *flag);
+int	find_color_blue_and_yellow(int iter);
 
 #endif //FRACTOL_H

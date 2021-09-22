@@ -30,7 +30,7 @@ int	check_belongings_m(double x, double y)
 	yn = y;
 
 	if (check_belong_to_cardioid(x, y) == 1)
-		return (1);
+		return (100);
 
 	while (i < 100)
 	{
@@ -38,10 +38,10 @@ int	check_belongings_m(double x, double y)
 		yn = 2 * xn * yn + y;
 		xn = tmp;
 		if (xn * xn + yn * yn >= 4)
-			return (0);
+			return (i);
 		i++;
 	}
-	return (1);
+	return (i);
 }
 
 void	render_image_m(t_img_data *data)
@@ -52,6 +52,7 @@ void	render_image_m(t_img_data *data)
 	double	y_tmp;
 	int		x;
 	int		y;
+	int		z;
 
 	x_step = data->info->cur_width / (double)WIN_WIDTH;
 	y_step = data->info->cur_height / (double)WIN_HEIGHT;
@@ -65,10 +66,13 @@ void	render_image_m(t_img_data *data)
 		x_tmp = data->info->x_corner;
 		while (x < WIN_WIDTH)
 		{
-			if (check_belongings_m(x_tmp, y_tmp) == 0)
-				my_mlx_pixel_put(data, x, y, 0x00FFFFFF);
-			else
-				my_mlx_pixel_put(data, x, y, 0x00000000);
+			z = check_belongings_m(x_tmp, y_tmp);
+//			if (check_belongings_m(x_tmp, y_tmp) == 0)
+//				my_mlx_pixel_put(data, x, y, 0x00FFFFFF);
+//			else
+//				my_mlx_pixel_put(data, x, y, 0x00000000);
+
+			my_mlx_pixel_put(data, x, y, find_color_blue_and_yellow(100 - z));
 			x_tmp += x_step;
 			x++;
 		}

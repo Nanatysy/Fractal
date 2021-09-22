@@ -9,6 +9,7 @@ add_executable(fractol
         errors.c
         mandelbrot.c
         julia.c
+        mlx_bonus.c
         main.c mlx_start.c)
 
 find_library(LIBFT ft libft)
