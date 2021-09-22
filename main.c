@@ -19,14 +19,12 @@ int	main(int argc, char **argv)
 
 	all.img_data = malloc(sizeof(t_img_data));
 	if (!all.img_data)
-		exit(9999);
+		exit(9999); // TODO: change to error message
+	all.img_data->info = malloc(sizeof(t_coord_info));
+	if (!all.img_data->info)
+		exit(8888);
 
-
-	if (all.set == MANDELBROT)
-		(void)argv; //  start mandelbrot
-	else if (all.set == JULIA)
-		(void)argv; //  start julia
-	else
+	if (all.set == 0)
 		return (print_errors(WRONG_SET));
 	mlx_start(&all);
 	return (0);

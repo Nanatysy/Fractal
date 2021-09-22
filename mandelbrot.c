@@ -53,15 +53,16 @@ void	render_image_m(t_img_data *data)
 	int		x;
 	int		y;
 
-	x_step = (3 - (-2 - data->x_corner) * 2) / (double)WIN_WIDTH;
-	y_step = (2 - (1 - data->y_corner) * 2) / (double)WIN_HEIGHT;
+	x_step = data->info->cur_width / (double)WIN_WIDTH;
+	y_step = data->info->cur_height / (double)WIN_HEIGHT;
+
 	y = 0;
-	y_tmp = data->y_corner;
+	y_tmp = data->info->y_corner;
 
 	while (y < WIN_HEIGHT)
 	{
 		x = 0;
-		x_tmp = data->x_corner;
+		x_tmp = data->info->x_corner;
 		while (x < WIN_WIDTH)
 		{
 			if (check_belongings_m(x_tmp, y_tmp) == 0)
