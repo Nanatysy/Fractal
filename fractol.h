@@ -67,4 +67,9 @@ int		check_belong_to_cardioid(double x, double y);
 int		print_errors(char *flag);
 int	find_color_blue_and_yellow(int iter);
 
+
+// bonus part
+int	key_press(int keycode, t_all *all);
+int	moise_catch_bonus(int button, int x, int y, t_all *all);
+
 #endif //FRACTOL_H

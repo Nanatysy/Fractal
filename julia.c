@@ -20,11 +20,11 @@ int	check_belongings_j(double x, double y)
 //	double	cy = 0.355;
 //	double	cx = -0.4;
 //	double	cy = -0.59;
-//	double	cx = -0.75;
-//	double	cy = 0.2;
+	double	cx = -0.75;
+	double	cy = 0.2;
 
-	double	cx = -0.4;
-	double	cy = 0.6;
+//	double	cx = -0.4;
+//	double	cy = 0.6;
 
 
 	i = 0;
@@ -140,36 +140,36 @@ void show_color_map(t_img_data *data)
 
 void	render_image_j(t_img_data *data)
 {
-//	double	x_step;
-//	double	y_step;
-//	double	x_tmp;
-//	double	y_tmp;
-//	int		x;
-//	int		y;
-//	int		z;
-//
-//	x_step = data->info->cur_width / (double)WIN_WIDTH;
-//	y_step = data->info->cur_height / (double)WIN_HEIGHT;
-//
-//	y = 0;
-//	y_tmp = data->info->y_corner;
-//
-//	while (y < WIN_HEIGHT)
-//	{
-//		x = 0;
-//
-//		x_tmp = data->info->x_corner;
-//		while (x < WIN_WIDTH)
-//		{
-//			z = check_belongings_j(x_tmp, y_tmp);
-//			my_mlx_pixel_put(data, x, y, find_color_blue_and_yellow(z));
-//			x_tmp += x_step;
-//			x++;
-//		}
-//		y_tmp -= y_step;
-//		y++;
-//	}
+	double	x_step;
+	double	y_step;
+	double	x_tmp;
+	double	y_tmp;
+	int		x;
+	int		y;
+	int		z;
 
-	show_color_map(data);
+	x_step = data->info->cur_width / (double)WIN_WIDTH;
+	y_step = data->info->cur_height / (double)WIN_HEIGHT;
+
+	y = 0;
+	y_tmp = data->info->y_corner;
+
+	while (y < WIN_HEIGHT)
+	{
+		x = 0;
+
+		x_tmp = data->info->x_corner;
+		while (x < WIN_WIDTH)
+		{
+			z = check_belongings_j(x_tmp, y_tmp);
+			my_mlx_pixel_put(data, x, y, find_color_blue_and_yellow(z));
+			x_tmp += x_step;
+			x++;
+		}
+		y_tmp -= y_step;
+		y++;
+	}
+
+//	show_color_map(data);
 
 }

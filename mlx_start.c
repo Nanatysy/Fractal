@@ -33,14 +33,15 @@ int	moise_catch(int button, int x, int y, t_all *all)
 	// 2 right
 	double	tmp;
 
-	mlx_mouse_get_pos(all->mlx_win, &x, &y); // bonus part
+	(void)x;
+	(void)y;
 
 	if (button == 5)
 	{
-		tmp = all->img_data->info->cur_height * 0.05;
+		tmp = all->img_data->info->cur_height * 0.25;
 		all->img_data->info->y_corner -= tmp / 2;
 		all->img_data->info->cur_height -= tmp;
-		tmp = all->img_data->info->cur_width * 0.05;
+		tmp = all->img_data->info->cur_width * 0.25;
 		all->img_data->info->x_corner += tmp / 2;
 		all->img_data->info->cur_width -= tmp;
 		if (all->set == MANDELBROT)
@@ -120,9 +121,10 @@ void	mlx_start(t_all *all)
 	mlx_put_image_to_window(all->mlx, all->mlx_win, all->mlx_image, 0, 0);
 
 	mlx_hook(all->mlx_win, 2, 1L<<0, my_close, all);
+	mlx_hook(all->mlx_win, 2, 1L<<0, key_press, all);
 	mlx_hook(all->mlx_win, 17, 1L<<16, my_close_x, all);
 
-	mlx_mouse_hook(all->mlx_win, moise_catch, all);
+	mlx_mouse_hook(all->mlx_win, moise_catch_bonus, all);
 
 	mlx_loop(all->mlx);
 }
