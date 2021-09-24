@@ -1,10 +1,11 @@
 //
-// Created by Debby Willette on 9/18/21.
+// Created by Debby Willette on 9/24/21.
 //
 
 #include "fractol.h"
 
-int	main(int argc, char **argv)
+int	main(int argc, char **argv) // TODO: add fractal set, add color changing
+// option
 {
 	t_all all;
 	if (argc != 2 && argc != 4)
@@ -34,6 +35,6 @@ int	main(int argc, char **argv)
 		return (print_errors(WRONG_SET));
 	if (all.set == JULIA && argc != 4)
 		exit(123); // TODO: change to proper error message and free memory
-	mlx_start(&all);
+	mlx_start_bonus(&all);
 	return (0);
 }

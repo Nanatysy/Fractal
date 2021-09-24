@@ -67,12 +67,7 @@ void	render_image_m(t_img_data *data)
 		while (x < WIN_WIDTH)
 		{
 			z = check_belongings_m(x_tmp, y_tmp);
-//			if (check_belongings_m(x_tmp, y_tmp) == 0)
-//				my_mlx_pixel_put(data, x, y, 0x00FFFFFF);
-//			else
-//				my_mlx_pixel_put(data, x, y, 0x00000000);
-
-			my_mlx_pixel_put(data, x, y, find_color_blue_and_yellow(100 - z));
+			my_mlx_pixel_put(data, x, y, data->f[data->index](100 - z));
 			x_tmp += x_step;
 			x++;
 		}

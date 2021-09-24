@@ -4,28 +4,12 @@
 
 #include "fractol.h"
 
-int	check_belongings_j(double x, double y)
+int	check_belongings_j(double x, double y, double cx, double cy)
 {
 	int		i;
 	double	xn;
 	double	yn;
 	double tmp;
-//	double	cx = 0.14096943887775515;
-//	double	cy = 0.5995240480961923;
-//	double	cx = -0.8021167334669339;
-//	double	cy = 0.2497745490981964;
-
-
-//	double	cx = 0.355;
-//	double	cy = 0.355;
-//	double	cx = -0.4;
-//	double	cy = -0.59;
-	double	cx = -0.75;
-	double	cy = 0.2;
-
-//	double	cx = -0.4;
-//	double	cy = 0.6;
-
 
 	i = 0;
 	xn = x;
@@ -48,7 +32,13 @@ int	find_color_blue_and_yellow(int iter)
 	int	red = 0;
 	int	green = 0;
 	int	blue = 0;
-	int	step = MAX_ITERATIONS / 4;
+	int	step;
+
+	if (MAX_ITERATIONS % 4 != 0)
+		step = (MAX_ITERATIONS + 4) / 4;
+	else
+		step = MAX_ITERATIONS / 4;
+
 	iter = MAX_ITERATIONS - iter;
 
 	if (iter < step)
@@ -127,7 +117,7 @@ void show_color_map(t_img_data *data)
 	while (x < WIN_WIDTH)
 	{
 		y = 0;
-		color = find_color_blue_and_yellow(x * MAX_ITERATIONS / WIN_WIDTH);
+		color = find_color_pink_and_green(x * MAX_ITERATIONS / WIN_WIDTH);
 		while (y < WIN_HEIGHT)
 		{
 			my_mlx_pixel_put(data, x, y, color);
@@ -138,7 +128,7 @@ void show_color_map(t_img_data *data)
 }
 
 
-void	render_image_j(t_img_data *data)
+void	render_image_j(t_img_data *data, double cx, double cy)
 {
 	double	x_step;
 	double	y_step;
@@ -161,15 +151,15 @@ void	render_image_j(t_img_data *data)
 		x_tmp = data->info->x_corner;
 		while (x < WIN_WIDTH)
 		{
-			z = check_belongings_j(x_tmp, y_tmp);
-			my_mlx_pixel_put(data, x, y, find_color_blue_and_yellow(z));
+			z = check_belongings_j(x_tmp, y_tmp, cx, cy);
+			my_mlx_pixel_put(data, x, y, data->f[data->index](z));
 			x_tmp += x_step;
 			x++;
 		}
 		y_tmp -= y_step;
 		y++;
 	}
-
+//	(void)cx;
+//	(void)cy;
 //	show_color_map(data);
-
 }

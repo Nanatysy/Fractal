@@ -9,13 +9,30 @@ add_executable(fractol
         errors.c
         mandelbrot.c
         julia.c
+        ft_atof.c
+        mlx_start.c
+        mlx_extra.c
+        main.c)
+
+add_executable(fractol_bonus
+        fractol.h
+        errors.c
+        mandelbrot.c
+        julia.c
         mlx_bonus.c
-        main.c mlx_start.c)
+        ft_atof.c
+        mlx_start_bonus.c
+        mlx_extra.c
+        main_bonus.c)
 
 find_library(LIBFT ft libft)
-#find_library(MLX mlx minilibX)
 file(GLOB LIBRARIES "${CMAKE_SOURCE_DIR}/libmlx.dylib")
+
 target_link_libraries(fractol LINK_PUBLIC ${LIBFT})
 target_link_libraries(fractol LINK_PUBLIC ${LIBRARIES})
 target_link_options(fractol PUBLIC -framework OpenGL)
 #target_link_options(fractol PUBLIC ${AppKit})
+
+target_link_libraries(fractol_bonus LINK_PUBLIC ${LIBFT})
+target_link_libraries(fractol_bonus LINK_PUBLIC ${LIBRARIES})
+target_link_options(fractol_bonus PUBLIC -framework OpenGL)
