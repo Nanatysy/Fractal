@@ -12,6 +12,8 @@ add_executable(fractol
         ft_atof.c
         mlx_start.c
         mlx_extra.c
+        colors.c
+        color_utils.c
         main.c)
 
 add_executable(fractol_bonus
@@ -23,7 +25,7 @@ add_executable(fractol_bonus
         ft_atof.c
         mlx_start_bonus.c
         mlx_extra.c
-        main_bonus.c)
+        main_bonus.c color_utils.c colors.c)
 
 find_library(LIBFT ft libft)
 file(GLOB LIBRARIES "${CMAKE_SOURCE_DIR}/libmlx.dylib")

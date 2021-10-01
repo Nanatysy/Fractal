@@ -25,15 +25,15 @@ int	main(int argc, char **argv)
 
 	all.img_data = malloc(sizeof(t_img_data));
 	if (!all.img_data)
-		exit(9999); // TODO: change to error message
+		free_and_exit(&all, MALLOC_ERROR);
 	all.img_data->info = malloc(sizeof(t_coord_info));
 	if (!all.img_data->info)
-		exit(8888);
+		free_and_exit(&all, MALLOC_ERROR);
 
 	if (all.set == 0)
-		return (print_errors(WRONG_SET));
+		free_and_exit(&all, WRONG_SET);
 	if (all.set == JULIA && argc != 4)
-		exit(123); // TODO: change to proper error message and free memory
+		free_and_exit(&all, ARG_NUM_ERROR_J);
 	mlx_start(&all);
 	return (0);
 }

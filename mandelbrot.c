@@ -28,10 +28,8 @@ int	check_belongings_m(double x, double y)
 	i = 0;
 	xn = x;
 	yn = y;
-
 	if (check_belong_to_cardioid(x, y) == 1)
 		return (100);
-
 	while (i < 100)
 	{
 		tmp = xn * xn - yn * yn + x;
@@ -46,32 +44,24 @@ int	check_belongings_m(double x, double y)
 
 void	render_image_m(t_img_data *data)
 {
-	double	x_step;
-	double	y_step;
-	double	x_tmp;
-	double	y_tmp;
-	int		x;
-	int		y;
-	int		z;
+	t_mlx_coord	c;
 
-	x_step = data->info->cur_width / (double)WIN_WIDTH;
-	y_step = data->info->cur_height / (double)WIN_HEIGHT;
-
-	y = 0;
-	y_tmp = data->info->y_corner;
-
-	while (y < WIN_HEIGHT)
+	c.x_step = data->info->cur_width / (double)WIN_WIDTH;
+	c.y_step = data->info->cur_height / (double)WIN_HEIGHT;
+	c.y = 0;
+	c.y_tmp = data->info->y_corner;
+	while (c.y < WIN_HEIGHT)
 	{
-		x = 0;
-		x_tmp = data->info->x_corner;
-		while (x < WIN_WIDTH)
+		c.x = 0;
+		c.x_tmp = data->info->x_corner;
+		while (c.x < WIN_WIDTH)
 		{
-			z = check_belongings_m(x_tmp, y_tmp);
-			my_mlx_pixel_put(data, x, y, data->f[data->index](100 - z));
-			x_tmp += x_step;
-			x++;
+			c.res = check_belongings_m(c.x_tmp, c.y_tmp);
+			my_mlx_pixel_put(data, c.x, c.y, data->f[data->index](c.res));
+			c.x_tmp += c.x_step;
+			c.x++;
 		}
-		y_tmp -= y_step;
-		y++;
+		c.y_tmp -= c.y_step;
+		c.y++;
 	}
 }

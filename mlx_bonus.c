@@ -4,48 +4,6 @@
 
 #include "fractol.h"
 
-int	find_color_pink_and_green(int iter)
-{
-	int	red = 0;
-	int	green = 0;
-	int	blue = 0;
-	int	step;
-//	iter = 250;
-	if (MAX_ITERATIONS % 4 != 0)
-		step = (MAX_ITERATIONS + 4) / 4;
-	else
-		step = MAX_ITERATIONS / 4;
-
-	if (iter < step)
-	{
-		red = 220 + iter * 20 / step;
-		green = 20 + iter * 108 / step;
-		blue = 60 + iter * 68 / step;
-	}
-	else if (iter < step * 2)
-	{
-		iter -= step;
-		red = 240 + iter * 15 / step;
-		green = 128 + iter * 127 / step;
-		blue = 128 + iter * 127 / step;
-	}
-	else if (iter < step * 3)
-	{
-		iter -= step * 2;
-		red = 255 - iter * 103 / step;
-		green = 255 - iter * 4 / step;
-		blue = 255 - iter * 103 / step;
-	}
-	else
-	{
-		iter -= step * 3;
-		red = 152 - iter * 152 / step;
-		green = 251 + iter * 4 / step;
-		blue = 152 - iter * 25 / step;
-	}
-	return (red * (int)pow(16, 4) + green * (int)pow(16, 2) + blue);
-}
-
 int	key_press(int keycode, t_all *all)
 {
 	static	int tmp;
@@ -74,6 +32,26 @@ int	key_press(int keycode, t_all *all)
 	mlx_put_image_to_window(all->mlx, all->mlx_win, all->mlx_image, 0, 0);
 	mlx_do_sync(all->mlx);
 	return (0);
+}
+
+void show_color_map(t_img_data *data)
+{
+	int x;
+	int y;
+	int	color;
+
+	x = 0;
+	while (x < WIN_WIDTH)
+	{
+		y = 0;
+		color = find_color_pink_and_green(x * MAX_ITERATIONS / WIN_WIDTH);
+		while (y < WIN_HEIGHT)
+		{
+			my_mlx_pixel_put(data, x, y, color);
+			y++;
+		}
+		x++;
+	}
 }
 
 int	moise_catch_bonus(int button, int x, int y, t_all *all)

@@ -8,7 +8,9 @@ SRCS =	main.c \
 		mlx_extra.c \
 		mandelbrot.c \
 		julia.c \
-		ft_atof.c
+		ft_atof.c \
+		colors.c \
+		color_utils.c
 
 SRC_BONUS = main_bonus.c \
 			errors.c \
@@ -17,7 +19,9 @@ SRC_BONUS = main_bonus.c \
 			mlx_bonus.c \
 			mandelbrot.c \
 			julia.c \
-			ft_atof.c
+			ft_atof.c \
+			colors.c \
+			color_utils.c
 
 OBJS = $(SRCS:.c=.o)
 

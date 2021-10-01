@@ -19,12 +19,27 @@
 # define WIN_HEIGHT 800
 # define WIN_WIDTH 1200
 
-# define MAX_ITERATIONS 250
+# define MAX_ITERATIONS 100
 
 # define ARG_NUM_ERROR "wrong number of arguments."
+# define ARG_NUM_ERROR_J "wrong number of arguments to output Julia set."
+# define WRONG_SET "wrong set."
+# define MALLOC_ERROR "failed to allocate memory."
+# define SCREEN_SIZE "invalid screen size."
+
 # define JULIA 1
 # define MANDELBROT 2
-# define WRONG_SET "wrong set."
+
+typedef struct	s_mlx_coord
+{
+	double		x_step;
+	double		y_step;
+	double		x_tmp;
+	double		y_tmp;
+	int			x;
+	int			y;
+	int			res;
+}				t_mlx_coord;
 
 typedef struct	s_coord_info
 {
@@ -60,9 +75,14 @@ typedef struct	s_all {
 
 void	mlx_start(t_all *all);
 void	my_mlx_pixel_put(t_img_data *data, int x, int y, int color);
+void	my_mlx_loop(t_all *all);
+void	zoom_in(t_all *all);
+void	zoom_out(t_all *all);
 void	render_image_m(t_img_data *data);
 void	render_image_j(t_img_data *data, double cx, double cy);
 void	init_coord_structure(t_coord_info *data, int flag);
+void	init_colors(int *red, int *green, int *blue);
+void	free_and_exit(t_all *all, char *flag);
 double	ft_atof(const char *arg);
 int		my_close_x(t_all *all);
 int		my_close(int keycode, t_all *all);
@@ -77,6 +97,8 @@ int		print_errors(char *flag);
 
 // bonus part
 void	mlx_start_bonus(t_all *all);
+void	my_mlx_loop_bonus(t_all *all);
+void	bonus_init(t_all *all);
 void	show_color_map(t_img_data *data);
 int		key_press(int keycode, t_all *all);
 int		moise_catch_bonus(int button, int x, int y, t_all *all);
