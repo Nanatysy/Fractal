@@ -4,132 +4,82 @@
 
 #include "fractol.h"
 
-int	find_color_rainbow(int iter)
+int	find_color_rainbow(int iter, int pow_4, int pow_2)
 {
-	int	red;
-	int	green;
-	int	blue;
-	int	step;
+	t_color	c;
+	int		step;
 
-	init_colors(&red, &green, &blue);
-	if (MAX_ITERATIONS % 5 != 0)
-		step = (MAX_ITERATIONS + 5) / 4;
-	else
-		step = MAX_ITERATIONS / 4;
-
-	if (iter < step)
-	{
-		red = 255;
-		green = iter * 255 / step;
-	}
-	else if (iter < step * 2)
-	{
-		iter -= step;
-		red = 255 - iter * 255 / step;
-		green = 255;
-	}
-	else if (iter < step * 3)
-	{
-		iter -= step * 2;
-		green = 255;
-		blue = iter * 255 / step;
-	}
+	init_colors(&c.red, &c.green, &c.blue);
+	find_step(5, &step);
+	if (iter < step * 3)
+		rainbow_first(&c, iter, step);
 	else if (iter < step * 4)
 	{
 		iter -= step * 3;
-		green = 255 - iter * 255 / step;
-		blue = 255;
+		c.green = 255 - iter * 255 / step;
+		c.blue = 255;
 	}
 	else
 	{
 		iter -= step * 4;
-		blue = 255 - iter * 255 / step;
-
+		c.blue = 255 - iter * 255 / step;
 	}
-	return (red * (int)pow(16, 4) + green * (int)pow(16, 2) + blue);
+	return (c.red * pow_4 + c.green * pow_2 + c.blue);
 }
 
-int	find_color_blue_and_yellow(int iter)
+int	find_color_blue_and_yellow(int iter, int pow_4, int pow_2)
 {
-	int	red;
-	int	green;
-	int	blue;
-	int	step;
+	t_color	c;
+	int		step;
 
-	init_colors(&red, &green, &blue);
-	if (MAX_ITERATIONS % 4 != 0)
-		step = (MAX_ITERATIONS + 4) / 4;
-	else
-		step = MAX_ITERATIONS / 4;
-
+	init_colors(&c.red, &c.green, &c.blue);
+	find_step(4, &step);
 	iter = MAX_ITERATIONS - iter;
-
-	if (iter < step)
-	{
-		red = iter * 255 / step;
-		green = iter * 200 / step;
-	}
-	else if (iter < step * 2)
-	{
-		iter -= step;
-		red = 255;
-		green = 200 + iter * 55 / step;
-		blue = iter * 255 / step;
-	}
+	if (iter < step * 2)
+		blue_and_yellow_first(&c, iter, step);
 	else if (iter < step * 3)
 	{
 		iter -= step * 2;
-		red = 255 - iter * 255 / step;
-		green = 255 - iter * 255 / step;
-		blue = 255;
+		c.red = 255 - iter * 255 / step;
+		c.green = 255 - iter * 255 / step;
+		c.blue = 255;
 	}
 	else
 	{
 		iter -= step * 3;
-		blue = 255 - iter * 127 / step;
+		c.blue = 255 - iter * 127 / step;
 	}
-	return (red * (int)pow(16, 4) + green * (int)pow(16, 2) + blue);
+	return (c.red * pow_4 + c.green * pow_2 + c.blue);
 }
 
-int	find_color_pink_and_green(int iter)
+int	find_color_pink_and_green(int iter, int pow_4, int pow_2)
 {
-	int	red;
-	int	green;
-	int	blue;
-	int	step;
+	t_color	c;
+	int		step;
 
-	init_colors(&red, &green, &blue);
-	if (MAX_ITERATIONS % 4 != 0)
-		step = (MAX_ITERATIONS + 4) / 4;
-	else
-		step = MAX_ITERATIONS / 4;
-
-	if (iter < step)
-	{
-		red = 220 + iter * 20 / step;
-		green = 20 + iter * 108 / step;
-		blue = 60 + iter * 68 / step;
-	}
-	else if (iter < step * 2)
-	{
-		iter -= step;
-		red = 240 + iter * 15 / step;
-		green = 128 + iter * 127 / step;
-		blue = 128 + iter * 127 / step;
-	}
+	init_colors(&c.red, &c.green, &c.blue);
+	find_step(5, &step);
+	if (iter < step * 2)
+		pink_and_green_first(&c, iter, step);
 	else if (iter < step * 3)
 	{
 		iter -= step * 2;
-		red = 255 - iter * 103 / step;
-		green = 255 - iter * 4 / step;
-		blue = 255 - iter * 103 / step;
+		c.red = 255 - iter * 103.0 / step;
+		c.green = 255 - iter * 4 / step;
+		c.blue = 255 - iter * 103 / step;
+	}
+	else if (iter < step * 4)
+	{
+		iter -= step * 3;
+		c.red = 152 - iter * 152 / step;
+		c.green = 251 + iter * 4 / step;
+		c.blue = 152 - iter * 25 / step;
 	}
 	else
 	{
-		iter -= step * 3;
-		red = 152 - iter * 152 / step;
-		green = 251 + iter * 4 / step;
-		blue = 152 - iter * 25 / step;
+		iter -= step * 4;
+		c.green = 255 - iter * 255 / step;
+		c.blue = 127 - iter * 127 / step;
 	}
-	return (red * (int)pow(16, 4) + green * (int)pow(16, 2) + blue);
+	return (c.red * pow_4 + c.green * pow_2 + c.blue);
 }

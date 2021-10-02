@@ -41,11 +41,16 @@ void	render_image_j(t_img_data *data, double cx, double cy)
 		while (c.x < WIN_WIDTH)
 		{
 			c.res = check_belongings_j(c.x_tmp, c.y_tmp, cx, cy);
-			my_mlx_pixel_put(data, c.x, c.y, data->f[data->index](c.res));
+			my_mlx_pixel_put(data, c.x, c.y, data->f[data->index](c.res,
+					data->pow_4, data->pow_2));
 			c.x_tmp += c.x_step;
 			c.x++;
 		}
 		c.y_tmp -= c.y_step;
 		c.y++;
 	}
+
+//	(void)cx;
+//	(void)cy;
+//	show_color_map(data);
 }

@@ -8,10 +8,10 @@ void	zoom_in(t_all *all)
 {
 	double	tmp;
 
-	tmp = all->img_data->info->cur_height * 0.25;
+	tmp = all->img_data->info->cur_height * 0.15;
 	all->img_data->info->y_corner -= tmp / 2;
 	all->img_data->info->cur_height -= tmp;
-	tmp = all->img_data->info->cur_width * 0.25;
+	tmp = all->img_data->info->cur_width * 0.15;
 	all->img_data->info->x_corner += tmp / 2;
 	all->img_data->info->cur_width -= tmp;
 	if (all->set == MANDELBROT)
@@ -26,10 +26,10 @@ void	zoom_out(t_all *all)
 {
 	double	tmp;
 
-	tmp = all->img_data->info->cur_height * 0.05;
+	tmp = all->img_data->info->cur_height * 0.15;
 	all->img_data->info->y_corner += tmp / 2;
 	all->img_data->info->cur_height += tmp;
-	tmp = all->img_data->info->cur_width * 0.05;
+	tmp = all->img_data->info->cur_width * 0.15;
 	all->img_data->info->x_corner -= tmp / 2;
 	all->img_data->info->cur_width += tmp;
 	if (all->set == MANDELBROT)

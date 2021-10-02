@@ -29,8 +29,8 @@ int	check_belongings_m(double x, double y)
 	xn = x;
 	yn = y;
 	if (check_belong_to_cardioid(x, y) == 1)
-		return (100);
-	while (i < 100)
+		return (MAX_ITERATIONS);
+	while (i < MAX_ITERATIONS)
 	{
 		tmp = xn * xn - yn * yn + x;
 		yn = 2 * xn * yn + y;
@@ -57,7 +57,8 @@ void	render_image_m(t_img_data *data)
 		while (c.x < WIN_WIDTH)
 		{
 			c.res = check_belongings_m(c.x_tmp, c.y_tmp);
-			my_mlx_pixel_put(data, c.x, c.y, data->f[data->index](c.res));
+			my_mlx_pixel_put(data, c.x, c.y, data->f[data->index](c.res,
+					data->pow_4, data->pow_2));
 			c.x_tmp += c.x_step;
 			c.x++;
 		}

@@ -16,10 +16,10 @@
 # define RED "\x1b[31m"
 # define NONE "\x1b[0m"
 
-# define WIN_HEIGHT 800
-# define WIN_WIDTH 1200
+# define WIN_HEIGHT 500
+# define WIN_WIDTH 500
 
-# define MAX_ITERATIONS 100
+# define MAX_ITERATIONS 1000
 
 # define ARG_NUM_ERROR "wrong number of arguments."
 # define ARG_NUM_ERROR_J "wrong number of arguments to output Julia set."
@@ -29,6 +29,13 @@
 
 # define JULIA 1
 # define MANDELBROT 2
+
+typedef struct	s_color
+{
+	int			red;
+	int			green;
+	int			blue;
+}				t_color;
 
 typedef struct	s_mlx_coord
 {
@@ -55,12 +62,14 @@ typedef struct	s_img_data
 {
 	t_coord_info	*info;
 	int			index;
-	int			(*f[3])(int);
+	int			(*f[3])(int, int, int);
 	char		*addr;
 	int			bits_per_pixel;
 	int			bytes_per_pixel;
 	int			line_length;
 	int			endian;
+	int			pow_4;
+	int			pow_2;
 }				t_img_data;
 
 typedef struct	s_all {
@@ -82,6 +91,8 @@ void	render_image_m(t_img_data *data);
 void	render_image_j(t_img_data *data, double cx, double cy);
 void	init_coord_structure(t_coord_info *data, int flag);
 void	init_colors(int *red, int *green, int *blue);
+void	init_struct(t_all *all);
+void	find_step(int num, int *step);
 void	free_and_exit(t_all *all, char *flag);
 double	ft_atof(const char *arg);
 int		my_close_x(t_all *all);
@@ -90,10 +101,14 @@ int		moise_catch(int button, int x, int y, t_all *all);
 int		check_belongings_m(double x, double y);
 int		check_belongings_j(double x, double y, double cx, double cy);
 int		check_belong_to_cardioid(double x, double y);
-int		find_color_blue_and_yellow(int iter);
-int		find_color_rainbow(int iter);
-int		find_color_pink_and_green(int iter);
+int		find_color_blue_and_yellow(int iter, int pow_4, int pow_2);
+int		find_color_rainbow(int iter, int pow_4, int pow_2);
+int		find_color_pink_and_green(int iter, int pow_4, int pow_2);
 int		print_errors(char *flag);
+
+void	rainbow_first(t_color *c, int iter, int step);
+void	blue_and_yellow_first(t_color *c, int iter, int step);
+void	pink_and_green_first(t_color *c, int iter, int step);
 
 // bonus part
 void	mlx_start_bonus(t_all *all);

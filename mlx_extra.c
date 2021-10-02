@@ -29,12 +29,19 @@ void	init_coord_structure(t_coord_info *data, int flag)
 {
 	if (flag == MANDELBROT)
 	{
-		data->x_corner = -2;
-		data->y_corner = 1;
-		data->cur_height = 2;
-		data->cur_width = 3;
-		data->x0 = -0.5;
-		data->y0 = 0;
+//		data->x_corner = -2;
+//		data->y_corner = 1;
+//		data->cur_height = 2;
+//		data->cur_width = 3;
+//		data->x0 = -0.5;
+//		data->y0 = 0;
+
+		data->cur_height = 0.00000014;
+		data->cur_width = 0.00000014;
+		data->x0 = -1.96680095;
+		data->y0 = 0.00000478;
+		data->x_corner = data->x0 - data->cur_width / 2;
+		data->y_corner =  data->y0 - data->cur_height / 2;
 	}
 	else
 	{
@@ -45,4 +52,17 @@ void	init_coord_structure(t_coord_info *data, int flag)
 		data->x0 = 0;
 		data->y0 = 0;
 	}
+}
+
+void	init_struct(t_all *all)
+{
+
+	all->img_data = malloc(sizeof(t_img_data));
+	if (!all->img_data)
+		free_and_exit(all, MALLOC_ERROR);
+	all->img_data->pow_4 = (int)pow(16, 4);
+	all->img_data->pow_2 = (int)pow(16, 2);
+	all->img_data->info = malloc(sizeof(t_coord_info));
+	if (!all->img_data->info)
+		free_and_exit(all, MALLOC_ERROR);
 }
