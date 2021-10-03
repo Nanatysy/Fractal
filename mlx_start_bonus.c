@@ -15,7 +15,7 @@ void	my_mlx_loop_bonus(t_all *all)
 
 void	bonus_init(t_all *all)
 {
-	all->img_data->index = 0;
+	all->img_data->index_c = 0;
 	all->img_data->f[0] = &find_color_rainbow;
 	all->img_data->f[1] = &find_color_blue_and_yellow;
 	all->img_data->f[2] = &find_color_pink_and_green;
@@ -39,11 +39,8 @@ void	mlx_start_bonus(t_all *all)
 			&all->img_data->line_length,
 			&all->img_data->endian);
 	all->img_data->bytes_per_pixel = all->img_data->bits_per_pixel / 8;
-	init_coord_structure(all->img_data->info, all->set);
-	if (all->set == MANDELBROT)
-		render_image_m(all->img_data);
-	else
-		render_image_j(all->img_data, all->cx, all->cy);
+	init_coord_structure(all->img_data->info, all->img_data->set);
+	render_image(all->img_data, all->cx, all->cy);
 	mlx_put_image_to_window(all->mlx, all->mlx_win, all->mlx_image, 0, 0);
 	my_mlx_loop_bonus(all);
 }

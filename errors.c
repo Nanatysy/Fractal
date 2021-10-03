@@ -18,12 +18,36 @@ int	print_errors(char *flag)
 
 void	free_and_exit(t_all *all, char *flag)
 {
+	int	i;
+
+	i = 0;
 	print_errors(flag);
 	if (all->img_data)
 	{
+		while (i < 3)
+		{
+			if (all->img_data->color_table[i])
+				free(all->img_data->color_table[i]);
+			i++;
+		}
 		if (all->img_data->info)
 			free(all->img_data->info);
 		free(all->img_data);
 	}
 	exit(0);
+}
+
+void	init_color_table(t_img_data *data)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < 3)
+	{
+		j = 0;
+		while (j <= MAX_ITERATIONS)
+			data->color_table[i][j++] = -1;
+		i++;
+	}
 }

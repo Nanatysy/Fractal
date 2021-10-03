@@ -4,6 +4,18 @@
 
 #include "fractol.h"
 
+int	is_neg(const char *arg)
+{
+	int	i;
+
+	i = 0;
+	while (arg[i] == ' ' || (arg[i] >= 9 && arg[i] <= 13))
+		i++;
+	if (arg[i] == '-')
+		return (1);
+	return (0);
+}
+
 double	ft_atof(const char *arg)
 {
 	double	res;
@@ -20,9 +32,9 @@ double	ft_atof(const char *arg)
 	res = (double)tmp;
 	tmp = ft_atoi(&arg[++i]);
 	j = 0;
-	while (ft_isdigit(arg[i++]))
+	while (ft_isdigit(arg[i++]) && j < 9)
 		j++;
-	if (res < 0)
+	if (is_neg(arg))
 		res -= (double)tmp / pow(10, j);
 	else
 		res += (double)tmp / pow(10, j);

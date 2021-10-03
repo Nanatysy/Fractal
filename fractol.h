@@ -16,10 +16,10 @@
 # define RED "\x1b[31m"
 # define NONE "\x1b[0m"
 
-# define WIN_HEIGHT 500
-# define WIN_WIDTH 500
+# define WIN_HEIGHT 800
+# define WIN_WIDTH 1200
 
-# define MAX_ITERATIONS 1000
+# define MAX_ITERATIONS 200
 
 # define ARG_NUM_ERROR "wrong number of arguments."
 # define ARG_NUM_ERROR_J "wrong number of arguments to output Julia set."
@@ -27,8 +27,11 @@
 # define MALLOC_ERROR "failed to allocate memory."
 # define SCREEN_SIZE "invalid screen size."
 
-# define JULIA 1
-# define MANDELBROT 2
+# define JULIA 0
+# define MANDELBROT 1
+# define SHIP 2
+# define DYNAMIC_J 3
+# define W_SET 4
 
 typedef struct	s_color
 {
@@ -61,8 +64,11 @@ typedef struct	s_coord_info
 typedef struct	s_img_data
 {
 	t_coord_info	*info;
-	int			index;
+	int			index_c;
+	int			set;
 	int			(*f[3])(int, int, int);
+	int			(*f_bel[3])(double, double, double, double);
+	int			*color_table[3];
 	char		*addr;
 	int			bits_per_pixel;
 	int			bytes_per_pixel;
@@ -70,6 +76,9 @@ typedef struct	s_img_data
 	int			endian;
 	int			pow_4;
 	int			pow_2;
+	int			*rainbow;
+	int			*blue_and_yellow;
+	int			*pink_and_green;
 }				t_img_data;
 
 typedef struct	s_all {
@@ -87,10 +96,13 @@ void	my_mlx_pixel_put(t_img_data *data, int x, int y, int color);
 void	my_mlx_loop(t_all *all);
 void	zoom_in(t_all *all);
 void	zoom_out(t_all *all);
+void	render_image(t_img_data *data, double cx, double cy);
 void	render_image_m(t_img_data *data);
 void	render_image_j(t_img_data *data, double cx, double cy);
+void	render_image_s(t_img_data *data);
 void	init_coord_structure(t_coord_info *data, int flag);
 void	init_colors(int *red, int *green, int *blue);
+void	init_color_table(t_img_data *data);
 void	init_struct(t_all *all);
 void	find_step(int num, int *step);
 void	free_and_exit(t_all *all, char *flag);
@@ -98,8 +110,9 @@ double	ft_atof(const char *arg);
 int		my_close_x(t_all *all);
 int		my_close(int keycode, t_all *all);
 int		moise_catch(int button, int x, int y, t_all *all);
-int		check_belongings_m(double x, double y);
+int		check_belongings_m(double x, double y, double tmp1, double tmp2);
 int		check_belongings_j(double x, double y, double cx, double cy);
+int		check_belongings_s(double x, double y, double tmp1, double tmp2);
 int		check_belong_to_cardioid(double x, double y);
 int		find_color_blue_and_yellow(int iter, int pow_4, int pow_2);
 int		find_color_rainbow(int iter, int pow_4, int pow_2);

@@ -9,15 +9,12 @@ void	zoom_in(t_all *all)
 	double	tmp;
 
 	tmp = all->img_data->info->cur_height * 0.15;
-	all->img_data->info->y_corner -= tmp / 2;
+	all->img_data->info->y_corner += tmp / 2;
 	all->img_data->info->cur_height -= tmp;
 	tmp = all->img_data->info->cur_width * 0.15;
 	all->img_data->info->x_corner += tmp / 2;
 	all->img_data->info->cur_width -= tmp;
-	if (all->set == MANDELBROT)
-		render_image_m(all->img_data);
-	else
-		render_image_j(all->img_data, all->cx, all->cy);
+		render_image(all->img_data, all->cx, all->cy);
 	mlx_put_image_to_window(all->mlx, all->mlx_win, all->mlx_image, 0, 0);
 	mlx_do_sync(all->mlx);
 }
@@ -27,15 +24,12 @@ void	zoom_out(t_all *all)
 	double	tmp;
 
 	tmp = all->img_data->info->cur_height * 0.15;
-	all->img_data->info->y_corner += tmp / 2;
+	all->img_data->info->y_corner -= tmp / 2;
 	all->img_data->info->cur_height += tmp;
 	tmp = all->img_data->info->cur_width * 0.15;
 	all->img_data->info->x_corner -= tmp / 2;
 	all->img_data->info->cur_width += tmp;
-	if (all->set == MANDELBROT)
-		render_image_m(all->img_data);
-	else
-		render_image_j(all->img_data, all->cx, all->cy);
+		render_image(all->img_data, all->cx, all->cy);
 	mlx_put_image_to_window(all->mlx, all->mlx_win, all->mlx_image, 0, 0);
 	mlx_do_sync(all->mlx);
 }
@@ -65,7 +59,7 @@ void	mlx_start(t_all *all)
 	int	screen_width;
 
 	all->mlx = mlx_init();
-	all->img_data->index = 0;
+	all->img_data->index_c = 0;
 	all->img_data->f[0] = &find_color_blue_and_yellow;
 	mlx_get_screen_size(all->mlx, &screen_width, &screen_height);
 	if (WIN_HEIGHT > screen_height || WIN_HEIGHT < 320 || WIN_WIDTH > \
@@ -78,11 +72,8 @@ void	mlx_start(t_all *all)
 			&all->img_data->line_length,
 			&all->img_data->endian);
 	all->img_data->bytes_per_pixel = all->img_data->bits_per_pixel / 8;
-	init_coord_structure(all->img_data->info, all->set);
-	if (all->set == MANDELBROT)
-		render_image_m(all->img_data);
-	else
-		render_image_j(all->img_data, all->cx, all->cy);
+	init_coord_structure(all->img_data->info, all->img_data->set);
+	render_image(all->img_data, all->cx, all->cy);
 	mlx_put_image_to_window(all->mlx, all->mlx_win, all->mlx_image, 0, 0);
 	my_mlx_loop(all);
 }

@@ -26,7 +26,7 @@ int	check_belongings_j(double x, double y, double cx, double cy)
 	return (MAX_ITERATIONS);
 }
 
-void	render_image_j(t_img_data *data, double cx, double cy)
+void	render_image(t_img_data *data, double cx, double cy)
 {
 	t_mlx_coord	c;
 
@@ -40,17 +40,16 @@ void	render_image_j(t_img_data *data, double cx, double cy)
 		c.x_tmp = data->info->x_corner;
 		while (c.x < WIN_WIDTH)
 		{
-			c.res = check_belongings_j(c.x_tmp, c.y_tmp, cx, cy);
-			my_mlx_pixel_put(data, c.x, c.y, data->f[data->index](c.res,
-					data->pow_4, data->pow_2));
+			c.res = data->f_bel[data->set](c.x_tmp, c.y_tmp, cx, cy);
+			if (data->color_table[data->index_c][c.res] == -1)
+				data->color_table[data->index_c][c.res] = data->f[data->index_c]
+					(c.res, data->pow_4, data->pow_2);
+			my_mlx_pixel_put(data, c.x, c.y, data->color_table[data->index_c]
+			[c.res]);
 			c.x_tmp += c.x_step;
 			c.x++;
 		}
-		c.y_tmp -= c.y_step;
+		c.y_tmp += c.y_step;
 		c.y++;
 	}
-
-//	(void)cx;
-//	(void)cy;
-//	show_color_map(data);
 }

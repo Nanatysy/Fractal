@@ -59,15 +59,8 @@ int	find_color_pink_and_green(int iter, int pow_4, int pow_2)
 
 	init_colors(&c.red, &c.green, &c.blue);
 	find_step(5, &step);
-	if (iter < step * 2)
+	if (iter < step * 3)
 		pink_and_green_first(&c, iter, step);
-	else if (iter < step * 3)
-	{
-		iter -= step * 2;
-		c.red = 255 - iter * 103.0 / step;
-		c.green = 255 - iter * 4 / step;
-		c.blue = 255 - iter * 103 / step;
-	}
 	else if (iter < step * 4)
 	{
 		iter -= step * 3;

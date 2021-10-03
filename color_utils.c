@@ -71,4 +71,11 @@ void	pink_and_green_first(t_color *c, int iter, int step)
 		c->green = 128 + iter * 127 / step;
 		c->blue = 128 + iter * 127 / step;
 	}
+	else if (iter < step * 3)
+	{
+		iter -= step * 2;
+		c->red = 255 - iter * 103.0 / step;
+		c->green = 255 - iter * 4 / step;
+		c->blue = 255 - iter * 103 / step;
+	}
 }
