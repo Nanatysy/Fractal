@@ -9,12 +9,20 @@ void	my_mlx_loop_bonus(t_all *all)
 	printf("If you want to change fractol color, please press ENTER\n");
 	mlx_hook(all->mlx_win, 2, 1L << 0, key_press, all);
 	mlx_hook(all->mlx_win, 17, 1L << 16, my_close_x, all);
-	mlx_mouse_hook(all->mlx_win, moise_catch_bonus, all);
+	if (all->img_data->set == DYNAMIC_J)
+		mlx_loop_hook(all->mlx, my_expose, all);
+	else
+		mlx_mouse_hook(all->mlx_win, moise_catch_bonus, all);
 	mlx_loop(all->mlx);
 }
 
 void	bonus_init(t_all *all)
 {
+	if (all->img_data->set == DYNAMIC_J)
+	{
+		all->cx = 0;
+		all->cy = 0;
+	}
 	all->img_data->index_c = 0;
 	all->img_data->f[0] = &find_color_rainbow;
 	all->img_data->f[1] = &find_color_blue_and_yellow;

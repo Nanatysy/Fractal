@@ -14,7 +14,7 @@ void	zoom_in(t_all *all)
 	tmp = all->img_data->info->cur_width * 0.15;
 	all->img_data->info->x_corner += tmp / 2;
 	all->img_data->info->cur_width -= tmp;
-		render_image(all->img_data, all->cx, all->cy);
+	render_image(all->img_data, all->cx, all->cy);
 	mlx_put_image_to_window(all->mlx, all->mlx_win, all->mlx_image, 0, 0);
 	mlx_do_sync(all->mlx);
 }
@@ -29,7 +29,7 @@ void	zoom_out(t_all *all)
 	tmp = all->img_data->info->cur_width * 0.15;
 	all->img_data->info->x_corner -= tmp / 2;
 	all->img_data->info->cur_width += tmp;
-		render_image(all->img_data, all->cx, all->cy);
+	render_image(all->img_data, all->cx, all->cy);
 	mlx_put_image_to_window(all->mlx, all->mlx_win, all->mlx_image, 0, 0);
 	mlx_do_sync(all->mlx);
 }

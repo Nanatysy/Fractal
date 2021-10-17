@@ -19,6 +19,7 @@ SRC_BONUS = main_bonus.c \
 			mlx_bonus.c \
 			mandelbrot.c \
 			julia.c \
+			ship.c \
 			ft_atof.c \
 			colors.c \
 			color_utils.c

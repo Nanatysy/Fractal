@@ -1,14 +1,10 @@
-//
-// Created by Debby Willette on 9/18/21.
-//
-
 #ifndef FRACTOL_H
-#define FRACTOL_H
+# define FRACTOL_H
 
-# include <stdlib.h> // malloc, free, exit
-# include <stdio.h> // printf
-# include <fcntl.h> // open
-# include <unistd.h> // close, write, read
+# include <stdlib.h>
+# include <stdio.h>
+# include <fcntl.h>
+# include <unistd.h>
 # include <math.h>
 # include "./libft/libft.h"
 # include "./minilibX/mlx.h"
@@ -16,8 +12,8 @@
 # define RED "\x1b[31m"
 # define NONE "\x1b[0m"
 
-# define WIN_HEIGHT 800
-# define WIN_WIDTH 1200
+# define WIN_HEIGHT 1080
+# define WIN_WIDTH 1800
 
 # define MAX_ITERATIONS 200
 
@@ -33,14 +29,14 @@
 # define DYNAMIC_J 3
 # define W_SET 4
 
-typedef struct	s_color
+typedef struct s_color
 {
 	int			red;
 	int			green;
 	int			blue;
 }				t_color;
 
-typedef struct	s_mlx_coord
+typedef struct s_mlx_coord
 {
 	double		x_step;
 	double		y_step;
@@ -51,7 +47,7 @@ typedef struct	s_mlx_coord
 	int			res;
 }				t_mlx_coord;
 
-typedef struct	s_coord_info
+typedef struct s_coord_info
 {
 	double		x_corner;
 	double		y_corner;
@@ -61,28 +57,27 @@ typedef struct	s_coord_info
 	double		y0;
 }				t_coord_info;
 
-typedef struct	s_img_data
+typedef struct s_img_data
 {
 	t_coord_info	*info;
-	int			index_c;
-	int			set;
-	int			(*f[3])(int, int, int);
-	int			(*f_bel[3])(double, double, double, double);
-	int			*color_table[3];
-	char		*addr;
-	int			bits_per_pixel;
-	int			bytes_per_pixel;
-	int			line_length;
-	int			endian;
-	int			pow_4;
-	int			pow_2;
-	int			*rainbow;
-	int			*blue_and_yellow;
-	int			*pink_and_green;
-}				t_img_data;
+	int				index_c;
+	int				set;
+	int				(*f[3])(int, int, int);
+	int				(*f_bel[4])(double, double, double, double);
+	int				*color_table[3];
+	char			*addr;
+	int				bits_per_pixel;
+	int				bytes_per_pixel;
+	int				line_length;
+	int				endian;
+	int				pow_4;
+	int				pow_2;
+	int				*rainbow;
+	int				*blue_and_yellow;
+	int				*pink_and_green;
+}					t_img_data;
 
-typedef struct	s_all {
-	int			set;
+typedef struct s_all {
 	double		cx;
 	double		cy;
 	void		*mlx;
@@ -97,9 +92,6 @@ void	my_mlx_loop(t_all *all);
 void	zoom_in(t_all *all);
 void	zoom_out(t_all *all);
 void	render_image(t_img_data *data, double cx, double cy);
-void	render_image_m(t_img_data *data);
-void	render_image_j(t_img_data *data, double cx, double cy);
-void	render_image_s(t_img_data *data);
 void	init_coord_structure(t_coord_info *data, int flag);
 void	init_colors(int *red, int *green, int *blue);
 void	init_color_table(t_img_data *data);
@@ -123,13 +115,14 @@ void	rainbow_first(t_color *c, int iter, int step);
 void	blue_and_yellow_first(t_color *c, int iter, int step);
 void	pink_and_green_first(t_color *c, int iter, int step);
 
-// bonus part
 void	mlx_start_bonus(t_all *all);
 void	my_mlx_loop_bonus(t_all *all);
 void	bonus_init(t_all *all);
 void	show_color_map(t_img_data *data);
 int		key_press(int keycode, t_all *all);
 int		moise_catch_bonus(int button, int x, int y, t_all *all);
+int		dynamic_julia(t_all *all, double x, double y);
+int		my_expose(t_all *all);
 
 /*
 	double	cx = 0.14096943887775515;

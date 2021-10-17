@@ -9,7 +9,7 @@ void	set_init(t_all *all, char **argv)
 	if (ft_strncmp(argv[1], "Julia set", ft_strlen("Julia set") + 1) == 0)
 		all->img_data->set = JULIA;
 	else if (ft_strncmp(argv[1], "Mandelbrot set",
-						ft_strlen("Mandelbrot set") + 1) == 0)
+			ft_strlen("Mandelbrot set") + 1) == 0)
 		all->img_data->set = MANDELBROT;
 	else
 		all->img_data->set = W_SET;

@@ -11,7 +11,9 @@ int	print_errors(char *flag)
 		!ft_strncmp(flag, WRONG_SET, ft_strlen(WRONG_SET)))
 	{
 		printf("Please specify which set you want to see:\n");
-		printf("Julia set or Mandelbrot set.\n");
+		printf("Julia set or Mandelbrot set for mandatory part.\n");
+		printf("Julia set, Mandelbrot set, Burning ship set or Dynamic Julia "
+			   "set for bonus part.\n");
 	}
 	return (0);
 }
